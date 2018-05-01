@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yfu-8R-62Q">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="60" width="375" height="563"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" restorationIdentifier="topTextView" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KG6-kZ-kxd">
-                                <rect key="frame" x="184" y="60" width="8" height="17"/>
+                                <rect key="frame" x="184" y="100" width="8" height="17"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -33,13 +33,36 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kis-nw-tlQ">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kis-nw-tlQ" userLabel="Toolbar Bottom">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Camera" id="Dgn-0b-Mfi"/>
-                                    <barButtonItem title="Album" width="1" id="Ikp-aE-Tcu">
+                                    <barButtonItem systemItem="flexibleSpace" id="c8v-4M-9Ob"/>
+                                    <barButtonItem systemItem="camera" id="Dgn-0b-Mfi">
+                                        <connections>
+                                            <action selector="onCameraClicked:" destination="BYZ-38-t0r" id="4Zb-dd-MHb"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" systemItem="fixedSpace" id="jbC-QS-Hb3"/>
+                                    <barButtonItem title="Album" id="Ikp-aE-Tcu">
                                         <connections>
                                             <action selector="onAlbumClicked:" destination="BYZ-38-t0r" id="V5s-S7-hYA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="1V0-sq-aVl"/>
+                                </items>
+                            </toolbar>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TuB-2P-6gb">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="action" id="7BY-79-uVp" userLabel="Share">
+                                        <connections>
+                                            <action selector="onShareMeme:" destination="BYZ-38-t0r" id="zX4-eu-UCe"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="ZzS-lS-zea"/>
+                                    <barButtonItem title="Cancel" id="ByX-0a-UrL" userLabel="Cancel">
+                                        <connections>
+                                            <action selector="onCancel:" destination="BYZ-38-t0r" id="TaP-bT-FGg"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -48,23 +71,30 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yfu-8R-62Q" secondAttribute="trailing" id="2Lw-f8-0JP"/>
-                            <constraint firstItem="yfu-8R-62Q" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="3lv-gw-QqQ"/>
                             <constraint firstItem="kis-nw-tlQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4Kz-00-6YV"/>
                             <constraint firstItem="kis-nw-tlQ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="7eF-BX-UhJ"/>
                             <constraint firstItem="kis-nw-tlQ" firstAttribute="top" secondItem="yfu-8R-62Q" secondAttribute="bottom" id="BVp-ls-4sQ"/>
                             <constraint firstItem="yfu-8R-62Q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="J5S-ib-a6M"/>
                             <constraint firstItem="EVv-NF-zgP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K6c-SK-6ZP"/>
+                            <constraint firstItem="yfu-8R-62Q" firstAttribute="top" secondItem="TuB-2P-6gb" secondAttribute="top" constant="40" id="M1B-gV-hrb"/>
                             <constraint firstItem="EVv-NF-zgP" firstAttribute="top" secondItem="kis-nw-tlQ" secondAttribute="top" constant="-80" id="O5Z-Hh-CBt"/>
                             <constraint firstItem="KG6-kZ-kxd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PrO-eB-TQr"/>
                             <constraint firstItem="kis-nw-tlQ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Uml-Fv-RqJ"/>
-                            <constraint firstItem="KG6-kZ-kxd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="tzn-eo-v3s"/>
+                            <constraint firstItem="TuB-2P-6gb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jSw-2s-z2i"/>
+                            <constraint firstItem="KG6-kZ-kxd" firstAttribute="top" secondItem="TuB-2P-6gb" secondAttribute="top" constant="80" id="tzn-eo-v3s"/>
+                            <constraint firstAttribute="trailing" secondItem="TuB-2P-6gb" secondAttribute="trailing" id="w35-Al-tiA"/>
+                            <constraint firstItem="TuB-2P-6gb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yIY-1L-MUj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="bottomTextView" destination="EVv-NF-zgP" id="dGc-Ov-dKZ"/>
+                        <outlet property="bottomToolbar" destination="kis-nw-tlQ" id="two-8Q-Taf"/>
+                        <outlet property="cameraItem" destination="Dgn-0b-Mfi" id="qGL-Pm-BH6"/>
                         <outlet property="memeImageView" destination="yfu-8R-62Q" id="Qew-Ws-O7q"/>
+                        <outlet property="shareItem" destination="7BY-79-uVp" id="OYF-cl-wIe"/>
                         <outlet property="topTextView" destination="KG6-kZ-kxd" id="eYQ-be-W8W"/>
+                        <outlet property="topToolbar" destination="TuB-2P-6gb" id="80k-g3-qeC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
