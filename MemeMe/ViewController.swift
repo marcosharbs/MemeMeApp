@@ -18,10 +18,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var topToolbar: UIToolbar!
     @IBOutlet weak var bottomToolbar: UIToolbar!
     
-    var activeField: UITextField?
-    
     struct Meme {
-        var topText : String
+        var topText: String
         var bottomText: String
         var originalImage: UIImage
         var memedImage: UIImage
@@ -48,14 +46,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        topTextView.defaultTextAttributes = memeTextAttributes
-        bottomTextView.defaultTextAttributes = memeTextAttributes
-        topTextView.text = "TOP"
-        bottomTextView.text = "BOTTOM"
+        configureTextField(textField: topTextView, text: "TOP")
+        configureTextField(textField: bottomTextView, text: "BOTTOM")
         shareItem.isEnabled = false;
-        topTextView.delegate = self
-        bottomTextView.delegate = self
+    }
+    
+    func configureTextField(textField: UITextField, text: String) {
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.text = text
+        textField.delegate = self
     }
     
     @IBAction func onAlbumClicked(_ sender: Any) {
@@ -63,7 +62,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         pickerController.delegate = self
         pickerController.sourceType = .photoLibrary
         self.present(pickerController, animated: true, completion: nil)
-        shareItem.isEnabled = true;
     }
     
     @IBAction func onCameraClicked(_ sender: Any) {
@@ -79,7 +77,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         let imageToShare = [memedImage]
         let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
         activityViewController.completionWithItemsHandler = {activity, success, items, error in
-            self.save(memedImage: memedImage)
+            if success {
+                self.save(memedImage: memedImage)
+            }
         }
         self.present(activityViewController, animated: true, completion: nil)
     }
@@ -97,8 +97,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     func generateMemedImage() -> UIImage {
-        topToolbar.isHidden = true
-        bottomToolbar.isHidden = true
+        configureBarVisibility(hidden: true)
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -106,10 +105,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        topToolbar.isHidden = false
-        bottomToolbar.isHidden = false
+        configureBarVisibility(hidden: false)
         
         return memedImage
+    }
+    
+    func configureBarVisibility(hidden: Bool) {
+        topToolbar.isHidden = hidden
+        bottomToolbar.isHidden = hidden
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -118,6 +121,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            shareItem.isEnabled = true;
             memeImageView.image = image
             memeImageView.contentMode = UIViewContentMode.scaleAspectFit
         }
@@ -125,7 +129,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeField = textField
         if let id = textField.restorationIdentifier {
             if id == "topTextView" && textField .text == "TOP" {
                 textField.text = ""
@@ -137,11 +140,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
+        let empty = textField.text?.isEmpty
+        let id = textField.restorationIdentifier
+        
+        if empty! {
+            if id == "topTextView" {
+                textField.text = "TOP"
+            } else if id == "bottomTextView" {
+                textField.text = "BOTTOM"
+            }
+        }
+        
         return true;
     }
     
     @objc func keyboardWillShow(_ notification:Notification) {
-        if activeField == bottomTextView {
+        if bottomTextView.isFirstResponder {
             view.frame.origin.y = 0 - getKeyboardHeight(notification)
         }
     }
