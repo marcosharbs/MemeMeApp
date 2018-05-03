@@ -58,18 +58,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     @IBAction func onAlbumClicked(_ sender: Any) {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.sourceType = .photoLibrary
-        self.present(pickerController, animated: true, completion: nil)
+        pickImage(sourceType: .photoLibrary)
     }
     
     @IBAction func onCameraClicked(_ sender: Any) {
+        pickImage(sourceType: .camera)
+    }
+    
+    func pickImage(sourceType: UIImagePickerControllerSourceType) {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
-        pickerController.sourceType = .camera
+        pickerController.sourceType = sourceType
         self.present(pickerController, animated: true, completion: nil)
-        shareItem.isEnabled = true;
     }
     
     @IBAction func onShareMeme(_ sender: Any) {
@@ -88,11 +88,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         topTextView.text = "TOP"
         bottomTextView.text = "BOTTOM"
         memeImageView.image = nil
-        shareItem.isEnabled = false;
+        shareItem.isEnabled = false
     }
     
     func save(memedImage: UIImage) {
-        // Create the meme
+        // MARK: - Create the meme
         let meme = Meme(topText: topTextView.text!, bottomText: bottomTextView.text!, originalImage: memeImageView.image!, memedImage: memedImage)
     }
     
