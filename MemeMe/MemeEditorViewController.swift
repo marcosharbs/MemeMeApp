@@ -84,6 +84,7 @@ class MemeEditorViewController: UIViewController, UITextFieldDelegate, UIImagePi
         bottomTextView.text = "BOTTOM"
         memeImageView.image = nil
         shareItem.isEnabled = false
+        self.dismiss(animated: true, completion: nil)
     }
     
     func save(memedImage: UIImage) {
@@ -91,6 +92,7 @@ class MemeEditorViewController: UIViewController, UITextFieldDelegate, UIImagePi
         let meme = Meme(topText: topTextView.text!, bottomText: bottomTextView.text!, originalImage: memeImageView.image!, memedImage: memedImage)
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.memes.append(meme)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func generateMemedImage() -> UIImage {
