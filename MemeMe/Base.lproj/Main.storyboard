@@ -162,11 +162,41 @@
                     <navigationItem key="navigationItem" title="Sent Memes" id="giN-Kc-G2i"/>
                     <connections>
                         <outlet property="collectionsView" destination="hpq-Za-t4A" id="fJb-UW-6pG"/>
+                        <outlet property="flowLayout" destination="x5h-Fx-v6j" id="K5Z-pL-GD1"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yww-Ng-9vW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="632.79999999999995" y="124.58770614692655"/>
+        </scene>
+        <!--Meme Detail View Controller-->
+        <scene sceneID="n6P-HG-qQQ">
+            <objects>
+                <viewController storyboardIdentifier="MemeDetailViewController" id="HXn-cG-A5I" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xat-Hh-g1Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4qf-cQ-Inr">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4qf-cQ-Inr" firstAttribute="leading" secondItem="bvd-RV-CuR" secondAttribute="leading" id="2ha-Xi-2yY"/>
+                            <constraint firstItem="bvd-RV-CuR" firstAttribute="trailing" secondItem="4qf-cQ-Inr" secondAttribute="trailing" id="MX9-Ie-QZN"/>
+                            <constraint firstItem="bvd-RV-CuR" firstAttribute="bottom" secondItem="4qf-cQ-Inr" secondAttribute="bottom" id="aKh-hV-byO"/>
+                            <constraint firstItem="4qf-cQ-Inr" firstAttribute="top" secondItem="bvd-RV-CuR" secondAttribute="top" id="oha-Qq-l4n"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bvd-RV-CuR"/>
+                    </view>
+                    <connections>
+                        <outlet property="memeImageView" destination="4qf-cQ-Inr" id="OKg-ap-mHP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jyp-rY-lEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1412" y="125"/>
         </scene>
         <!--MemeEditorViewController-->
         <scene sceneID="tne-QT-ifu">
@@ -258,7 +288,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1425" y="-302"/>
+            <point key="canvasLocation" x="1412" y="-647"/>
         </scene>
     </scenes>
     <resources>
